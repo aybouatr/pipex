@@ -1,28 +1,37 @@
 #include "../includes/pipex.h" 
 
 
-void execution(char* path,char** cmd)
+void execution(char** envp,char* cmd)
 {
-    if (execve(path,cmd,NULL) == -1)
+    char*   path;
+    char**  s_cmd;
+
+    s_cmd = ft_split(cmd,' ');
+    path = ft_get_path(envp,s_cmd[0]);
+    if(!path)
+    {
+        ft_free(s_cmd,NULL);
         error();
+    }
+    if (execve(path,cmd,NULL) == -1)
+    {
+        ft_free(s_cmd,path);
+        error();
+    }
+    ft_free(s_cmd,path);
 }
 
 void child_process(char** envp,char* file_inp,char* cmd,int* fd_p)
 {
     int     fd_in;
-    char*   path;
-    char**  s_cmd;
-
+    
     closing(fd_p[0]);
     fd_in = open(file_inp,O_RDONLY,0777);
     if (fd_in == -1)
         error();
     rediction_dup2(fd_in,STDIN_FILENO);
-    s_cmd = ft_split(cmd,' ');
-    path = ft_get_path(envp,s_cmd[0]);
     rediction_dup2(fd_p[1],STDOUT_FILENO);
-    execution(path,s_cmd);
-    ft_free(s_cmd,path);
+    execution(envp,cmd);
     closing(fd_in);
     closing(fd_p[1]);
 }
@@ -30,18 +39,14 @@ void child_process(char** envp,char* file_inp,char* cmd,int* fd_p)
 void parent_process(char** envp,char* file_oup,char* cmd,int* fd_p)
 {
     int     fd_ou;
-    char*   path;
-    char** s_cmd;
 
     closing(fd_p[1]);
     fd_ou = open(file_oup, O_WRONLY | O_CREAT | O_TRUNC, 0777);
     if (fd_ou == -1)
         error();
     rediction_dup2(fd_p[0],STDIN_FILENO);
-    s_cmd = ft_split(cmd,' ');
-    path = ft_get_path(envp,s_cmd[0]);
     rediction_dup2(fd_ou,STDOUT_FILENO);
-    execution(path,s_cmd);
+    execution(envp,cmd);
     closing(fd_ou);
     closing(fd_p[0]);
 }
