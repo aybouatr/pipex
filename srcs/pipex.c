@@ -1,54 +1,34 @@
 #include "../includes/pipex.h" 
 
 
-void execution(char** envp,char* cmd)
-{
-    char*   path;
-    char**  s_cmd;
-
-    s_cmd = ft_split(cmd,' ');
-    path = ft_get_path(envp,s_cmd[0]);
-    if(!path)
-    {
-        ft_free(s_cmd,NULL);
-        error();
-    }
-    if (execve(path,cmd,NULL) == -1)
-    {
-        ft_free(s_cmd,path);
-        error();
-    }
-    ft_free(s_cmd,path);
-}
-
 void child_process(char** envp,char* file_inp,char* cmd,int* fd_p)
 {
     int     fd_in;
     
-    closing(fd_p[0]);
+    close(fd_p[0]);
     fd_in = open(file_inp,O_RDONLY,0777);
     if (fd_in == -1)
-        error();
+        error(1);
     rediction_dup2(fd_in,STDIN_FILENO);
     rediction_dup2(fd_p[1],STDOUT_FILENO);
     execution(envp,cmd);
-    closing(fd_in);
-    closing(fd_p[1]);
+    close(fd_in);
+    close(fd_p[1]);
 }
 
 void parent_process(char** envp,char* file_oup,char* cmd,int* fd_p)
 {
     int     fd_ou;
 
-    closing(fd_p[1]);
+    close(fd_p[1]);
     fd_ou = open(file_oup, O_WRONLY | O_CREAT | O_TRUNC, 0777);
     if (fd_ou == -1)
-        error();
+        error(1);
     rediction_dup2(fd_p[0],STDIN_FILENO);
     rediction_dup2(fd_ou,STDOUT_FILENO);
     execution(envp,cmd);
-    closing(fd_ou);
-    closing(fd_p[0]);
+    close(fd_ou);
+    close(fd_p[0]);
 }
 
 int main(int ac,char* av[],char* envp[])
@@ -59,10 +39,10 @@ int main(int ac,char* av[],char* envp[])
     if(ac == 5)
     {
         if (pipe(fd_p) == -1)
-            error();
+            error(1);
         p_id = fork();
         if (p_id == -1)
-            error();
+            error(1);
         if (p_id == 0)
             child_process(envp,av[1],av[2],fd_p);
         waitpid(p_id,NULL,0);
@@ -71,7 +51,7 @@ int main(int ac,char* av[],char* envp[])
     else
     {
         ft_putstr_fd("\033[31mError: Bad arguments\n\e[0m", 2);
-		ft_putstr_fd("Ex: ./pipex <file1> <cmd1> <cmd2> <file2>\n", 1);
+		ft_putstr_fd("Ex: ./pipex <file1> <cmd1> <cmd2> <file2>\n", 2);
     }
     return (0);
 }

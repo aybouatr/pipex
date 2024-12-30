@@ -4,13 +4,40 @@
 void rediction_dup2(int fd,int fd_to_rediction)
 {
     if(dup2(fd,fd_to_rediction) == -1)
-        error();
+        error(1);
 }
 
-void	error(void)
+void execution(char** envp,char* cmd)
+{
+    char*   path;
+    char**  s_cmd;
+    char** sp_cmd;
+    int    i;
+
+    sp_cmd = ft_split(cmd,'/');
+    i = 0;
+    while (sp_cmd[i + 1] != NULL)
+        i++;
+    s_cmd = ft_split(sp_cmd[i],' ');
+    path = ft_get_path(envp,s_cmd[0]);
+    ft_free(sp_cmd,NULL);
+    if(!path)
+    {
+        ft_free(s_cmd,NULL);
+        error(1);
+    }
+    if (execve(path,s_cmd,NULL) == -1)
+    {
+        ft_free(s_cmd,path);
+        error(1);
+    }
+    ft_free(s_cmd,path);
+}
+
+void	error(int n)
 {
 	perror("\033[31mError");
-	exit(EXIT_FAILURE);
+	exit(n);
 }
 
 char* ft_get_path(char** envp,char* cmd)
@@ -40,9 +67,8 @@ char* ft_get_path(char** envp,char* cmd)
         free(path);
         i++;
     }
-    return (ft_free(s_path,NULL),NULL);
+    return (ft_free(s_path,NULL),error(127),NULL);
 }
-
 void ft_free(char** arr,char* str)
 {
     int i;
@@ -56,10 +82,4 @@ void ft_free(char** arr,char* str)
     free(arr);
     if (str)
         free(str);
-}
-
-void closing(int fd)
-{
-    if (close(fd) == -1)
-        error();
 }
