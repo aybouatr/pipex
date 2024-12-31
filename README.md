@@ -53,11 +53,11 @@
         Definition: Duplicates an existing file descriptor and returns a new one. This new descriptor refers to the same file or resource.
         Example: int new_fd = dup(fd);
 
-14. dup2
+15. dup2
 
          Definition: Similar to dup(), but you can specify the exact number for the new file descriptor.
         Example: dup2(fd, new_fd);
-    resource : https://youtu.be/PIb2aShU_H4?si=VCbIP6IDcMREhNAb
+     you can view the video  by clicking on the following link  : https://youtu.be/PIb2aShU_H4?si=VCbIP6IDcMREhNAb
 
 16. execve
 
@@ -78,18 +78,19 @@
 
         Definition: Creates a pair of file descriptors that can be used for inter-process communication (IPC). One file descriptor is for reading, the other for writing.
         Example: pipe(fd);
+   you can view the video  by clicking on the following link : https://youtu.be/VWAkfyz78sg?si=yIPCLo9wKFASW5gP 
 
-20. unlink
+21. unlink
 
         Definition: Removes a file from the filesystem. It deletes the file, but the file is not actually removed until all processes stop using it.
         Example: unlink("file.txt");
 
-21. wait
+22. wait
 
          Definition: Makes the parent process wait for any of its child processes to finish. It returns the process ID of the terminated child.
         Example: wait(NULL);
 
-22. waitpid
+23. waitpid
 
     Definition: Similar to wait(), but allows the parent to wait for a specific child process to terminate by providing the child’s process ID.
     Example: waitpid(pid, &status, 0);
