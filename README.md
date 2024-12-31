@@ -2,6 +2,7 @@
 
 
          Here’s a simple definition for each of the Unix system calls
+first you can start this video is very useful : https://youtu.be/Vax97MIL_uI?si=682KskoLRsWIxyeK
         
 1. open
 
@@ -73,8 +74,9 @@
 
         Definition: Creates a new child process that is a copy of the parent process. It returns 0 to the child and the child’s process ID to the parent.
         Example: pid_t pid = fork();
+    you can view the video  by clicking on the following link : https://youtu.be/SKN7UoQe8_w?si=FPeUyFXb0vZxN35I
 
-19. pipe
+20. pipe
 
         Definition: Creates a pair of file descriptors that can be used for inter-process communication (IPC). One file descriptor is for reading, the other for writing.
         Example: pipe(fd);
