@@ -94,5 +94,5 @@ first you can start this video is very useful : https://youtu.be/Vax97MIL_uI?si=
 
 23. waitpid
 
-    Definition: Similar to wait(), but allows the parent to wait for a specific child process to terminate by providing the child’s process ID.
-    Example: waitpid(pid, &status, 0);
+        Definition: Similar to wait(), but allows the parent to wait for a specific child process to terminate by providing the child’s process ID.
+        Example: waitpid(pid, &status, 0);
