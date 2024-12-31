@@ -28,7 +28,7 @@ first you can start this video is very useful : https://youtu.be/Vax97MIL_uI?si=
 
        Definition: Allocates a block of memory of a specified size and returns a pointer to it. It is used to dynamically allocate memory in C.
        Example: char *ptr = malloc(100);
-
+    you can view the video  by clicking on the following link : https://youtu.be/3Fegr6Jm4Ec?si=gAIyII4CeYmEYrV2
 8. free
 
        Definition: Frees a previously allocated block of memory (using malloc or calloc) to make it available for reuse.
