@@ -5,18 +5,18 @@
         
 1. open
 
-    Definition: Opens a file to read from, write to, or both. It returns a file descriptor that you can use to access the file.
-    Example: open("file.txt", O_RDONLY);
+        Definition: Opens a file to read from, write to, or both. It returns a file descriptor that you can use to access the file.
+       Example: open("file.txt", O_RDONLY);
 
 2. close
 
-    Definition: Closes an open file descriptor, freeing up the system resources associated with it.
-    Example: close(fd);
+       Definition: Closes an open file descriptor, freeing up the system resources associated with it.
+       Example: close(fd);
 
 3. read
 
-    Definition: Reads data from a file descriptor into a buffer.
-    Example: read(fd, buffer, size);
+       Definition: Reads data from a file descriptor into a buffer.
+       Example: read(fd, buffer, size);
 
 4. write
 
