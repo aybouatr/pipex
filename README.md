@@ -57,7 +57,7 @@
 
          Definition: Similar to dup(), but you can specify the exact number for the new file descriptor.
         Example: dup2(fd, new_fd);
-        resource : https://youtu.be/PIb2aShU_H4?si=VCbIP6IDcMREhNAb
+    resource : https://youtu.be/PIb2aShU_H4?si=VCbIP6IDcMREhNAb
 
 16. execve
 
