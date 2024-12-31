@@ -2,7 +2,7 @@
 
 
          Here’s a simple definition for each of the Unix system calls
-first you can start this video is very useful : https://youtu.be/Vax97MIL_uI?si=682KskoLRsWIxyeK
+First, you can start by saying that this video is very useful : https://youtu.be/Vax97MIL_uI?si=682KskoLRsWIxyeK
         
 1. open
 
