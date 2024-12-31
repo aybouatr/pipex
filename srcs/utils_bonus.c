@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aybouatr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/31 08:42:29 by aybouatr          #+#    #+#             */
+/*   Updated: 2024/12/31 08:42:34 by aybouatr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/pipex.h"
 
 int	ftt_strchr(const char *str, char search_str)
@@ -97,13 +109,13 @@ char	*get_than_line(char *s_str)
 	return (buffer);
 }
 
-int open_fd(char* name_file,int fd)
+int	open_fd(char *name_file, int fd)
 {
-    int	file;
+	int	file;
 
 	file = 0;
 	if (fd == 0)
-		file = open(name_file, O_RDWR , 0777);
+		file = open(name_file, O_RDWR, 0777);
 	else if (fd == 1)
 		file = open(name_file, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (file == -1)
