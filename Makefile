@@ -14,28 +14,28 @@ HEADER	=  -I./includes
 CC 		= cc
 CFLAGS 	= -Wall -Wextra -Werror -g
 
-.c.o:		%.o : %.c
-					@$(CC) ${CFLAGS} ${HEADER} -c $< -o $(<:.c=.o)
+%.o : %.c
+		$(CC) ${CFLAGS} ${HEADER} -c $< -o $(<:.c=.o)
 
 all: 		${PROG}
 
 ${PROG}:	${OBJS}
-					@make re -C ./libft
-					@$(CC) ${OBJS} -Llibft -lft -o ${PROG}
+					@make re -C ./Libft
+					@$(CC) ${OBJS} -LLibft -lft -o ${PROG}
 
 
 bonus:		${PROG_B}
 
 ${PROG_B}:	${OBJS_B}
-					@make re -C ./libft
-					@$(CC) ${OBJS_B} -Llibft -lft -o ${PROG_B}
+					@make re -C ./Libft
+					@$(CC) ${OBJS_B} -LLibft -lft -o ${PROG_B}
 
 clean:
-					@make clean -C ./libft
+					@make clean -C ./Libft
 					@rm -f ${OBJS} ${OBJS_B}
 
 fclean: 	clean
-					@make fclean -C ./libft
+					@make fclean -C ./Libft
 					@rm -f $(NAME)
 					@rm -f ${PROG}
 

@@ -10,15 +10,33 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "pipex.h"
 
-void	rediction_dup2(int fd, int fd_to_rediction)
+int	check_cmd(char **av, int ac)
 {
-	if (dup2(fd, fd_to_rediction) == -1)
-		error(1);
+	int	i;
+	int	check;
+
+	i = 2;
+	check = 0;
+	if (ft_strncmp("here_doc", av[1], 8) == 0)
+		i = 3;
+	while (i < ac - 1)
+	{
+		if (av[i][0] == '\0')
+		{
+			ft_putstr_fd("Error : ", 2);
+			ft_putstr_fd("Permission denied\n", 1);
+			check = 1;
+		}
+		i++;
+	}
+	if (check != 0)
+		return (exit(126), 126);
+	return (1);
 }
 
-void	execution(char **envp, char *cmd)
+int	execution(char **envp, char *cmd)
 {
 	char	*path;
 	char	**s_cmd;
@@ -30,24 +48,27 @@ void	execution(char **envp, char *cmd)
 	while (sp_cmd[i + 1] != NULL)
 		i++;
 	s_cmd = ft_split(sp_cmd[i], ' ');
-	path = ft_get_path(envp, s_cmd[0]);
 	ft_free(sp_cmd, NULL);
+	if (!s_cmd[0])
+	{
+		ft_putstr_fd("Error : command not found \n", 2);
+		return (exit(127), 127);
+	}
+	path = ft_get_path(envp, s_cmd[0]);
 	if (!path)
 	{
 		ft_free(s_cmd, NULL);
 		error(1);
 	}
 	if (execve(path, s_cmd, NULL) == -1)
-	{
-		ft_free(s_cmd, path);
-		error(1);
-	}
-	ft_free(s_cmd, path);
+		return (ft_free(s_cmd, path), error(1), 1);
+	return (ft_free(s_cmd, path), 1);
 }
-
+/// ////////////////////////////////
+/// ////////////////////////////////
 void	error(int n)
 {
-	perror("\033[31mError");
+	perror("Error ");
 	exit(n);
 }
 
@@ -63,12 +84,12 @@ char	*ft_get_path(char **envp, char *cmd)
 		i++;
 	while (i >= 0 && s_path == NULL)
 	{
-		if (ft_memcmp(envp[i], "PATH=", 5) == 0)
+		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
 			s_path = ft_split(envp[i] + 5, ':');
 		i--;
 	}
 	i = 0;
-	while (s_path[i])
+	while (s_path != NULL && s_path[i])
 	{
 		path[1] = ft_strjoin(s_path[i], "/");
 		path[0] = ft_strjoin(path[1], cmd);
@@ -76,7 +97,8 @@ char	*ft_get_path(char **envp, char *cmd)
 			return (ft_free(s_path, path[1]), path[0]);
 		i++;
 	}
-	return (ft_free(s_path, NULL), error(127), NULL);
+	ft_free(s_path, NULL);
+	return (ft_putstr_fd("command not found\n", 2), exit(127), NULL);
 }
 
 void	ft_free(char **arr, char *str)
@@ -84,12 +106,11 @@ void	ft_free(char **arr, char *str)
 	int	i;
 
 	i = 0;
-	while (arr[i])
+	while (arr != NULL && arr[i])
 	{
 		free(arr[i]);
 		i++;
 	}
-	free(arr);
 	if (str)
 		free(str);
 }

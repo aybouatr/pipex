@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "pipex.h"
 
 void	apply_all_cmd(char *cmd, char **envp)
 {
@@ -20,16 +20,18 @@ void	apply_all_cmd(char *cmd, char **envp)
 	if (pipe(fd_p) == -1)
 		error(1);
 	pip = fork();
+	if (pip == -1)
+		error(1);
 	if (pip == 0)
 	{
 		close(fd_p[0]);
-		rediction_dup2(fd_p[1], STDOUT_FILENO);
+		dup2(fd_p[1], STDOUT_FILENO);
 		execution(envp, cmd);
 	}
 	else
 	{
 		close(fd_p[1]);
-		rediction_dup2(fd_p[0], STDIN_FILENO);
+		dup2(fd_p[0], STDIN_FILENO);
 		waitpid(pip, NULL, 0);
 	}
 }
@@ -111,7 +113,7 @@ int	ft_here_doc(char *limiter, char *file)
 	else
 	{
 		close(fd[1]);
-		rediction_dup2(fd[0], STDIN_FILENO);
+		dup2(fd[0], STDIN_FILENO);
 		wait(NULL);
 	}
 	return (open_fd(file, 1));
@@ -122,7 +124,7 @@ int	main(int ac, char *av[], char *envp[])
 	int	file_in_or_out[2];
 	int	i;
 
-	if (ac >= 5)
+	if (ac >= 5 && check_cmd(av, ac))
 	{
 		if (ft_strncmp("here_doc", av[1], 8) == 0)
 		{
@@ -134,14 +136,14 @@ int	main(int ac, char *av[], char *envp[])
 			i = 2;
 			file_in_or_out[0] = open_fd(av[1], 0);
 			file_in_or_out[1] = open_fd(av[ac - 1], 1);
-			rediction_dup2(file_in_or_out[0], STDIN_FILENO);
+			dup2(file_in_or_out[0], STDIN_FILENO);
 		}
 		while (i < ac - 2)
 			apply_all_cmd(av[i++], envp);
-		rediction_dup2(file_in_or_out[1], STDOUT_FILENO);
+		dup2(file_in_or_out[1], STDOUT_FILENO);
 		execution(envp, av[ac - 2]);
 	}
 	else
-		perror("Check your argument!\n");
-	return (0);
+		return (ft_putstr_fd("Error: Bad arguments\n", 1), exit(1), 0);
+	return (close(file_in_or_out[1]), close(file_in_or_out[0]), 0);
 }

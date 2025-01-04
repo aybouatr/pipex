@@ -6,14 +6,14 @@
 /*   By: aybouatr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 08:44:46 by aybouatr          #+#    #+#             */
-/*   Updated: 2024/12/31 08:44:56 by aybouatr         ###   ########.fr       */
+/*   Updated: 2025/01/02 11:50:28 by aybouatr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# include "../libft/libft.h"
+# include "../Libft/libft.h"
 # include <fcntl.h>
 # include <limits.h>
 # include <stdio.h>
@@ -26,9 +26,9 @@
 #  define BUFFER_SIZE 1000
 # endif
 
-void	rediction_dup2(int fd, int fd_to_rediction);
+int		check_cmd(char **av, int ac);
 void	ft_free(char **arr, char *str);
-void	execution(char **envp, char *cmd);
+int		execution(char **envp, char *cmd);
 void	child_process(char **envp, char *file_inp, char *cmd, int *fd_p);
 void	parent_process(char **envp, char *file_oup, char *cmd, int *fd_p);
 void	error(int n);
