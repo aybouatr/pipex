@@ -34,7 +34,7 @@ int					ft_atoi(const char *str);
 size_t				ft_strlen(const char *str);
 char				*ft_strchr(const char *str, int search_str);
 char				*ft_strrchr(const char *str, int c);
-int					ft_strncmp(const char *s1, const char *s2, size_t len);
+int					ft_strncmp(char *s1, char *s2, size_t len, int isfree);
 void				*ft_memchr(const void *buf, int c, size_t count);
 int					ft_memcmp(const void *pointer1, const void *pointer2,
 						size_t size);

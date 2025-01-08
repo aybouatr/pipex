@@ -59,11 +59,11 @@ int	main(int ac, char *av[], char *envp[])
 		if (p_id == 0)
 			child_process(envp, av[1], av[2], fd_p);
 		parent_process(envp, av[4], av[3], fd_p);
-		waitpid(p_id, NULL, 0);
+		wait(NULL);
 	}
 	else
 	{
-		ft_putstr_fd("\033[31mError: Bad arguments\n\e[0m", 1);
+		ft_putstr_fd("Error: Bad arguments\n", 1);
 		ft_putstr_fd("Ex: ./pipex <file1> <cmd1> <cmd2> <file2>\n", 1);
 	}
 	return (0);

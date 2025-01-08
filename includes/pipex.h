@@ -23,7 +23,7 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1000
+#  define BUFFER_SIZE 333
 # endif
 
 int		check_cmd(char **av, int ac);

@@ -1,46 +1,40 @@
-PROG	= pipex
-PROG_B  = pipex_bonus
+My_PROG = pipex
+My_PROG_B = pipex_bonus
 
-SRCS 	= srcs/pipex.c srcs/utils.c
-OBJS 	= ${SRCS:.c=.o}
-MAIN	= srcs/pipex.c
+SRC = srcs/pipex.c srcs/utils.c
+B_SRC = srcs/pipex_bonus.c srcs/utils.c srcs/utils_bonus.c
 
-SRCS_B	= srcs/pipex_bonus.c srcs/utils.c srcs/utils_bonus.c
-OBJS_B	= ${SRCS_B:.c=.o}
-MAIN_B	= srcs/pipex_bonus.c
+O_JECT = $(SRC:.c=.o)
+BO_JECT = $(B_SRC:.c=.o)
 
-HEADER	=  -I./includes
+HEADER = -I./includes
 
-CC 		= cc
-CFLAGS 	= -Wall -Wextra -Werror -g
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
 
-%.o : %.c
-		$(CC) ${CFLAGS} ${HEADER} -c $< -o $(<:.c=.o)
+%.o: %.c
+	$(CC) $(CFLAGS) $(HEADER) -c $< -o $@
 
-all: 		${PROG}
+all: $(O_JECT)
+	@make -C ./Libft
+	@$(CC) $(O_JECT) -LLibft -lft -o $(My_PROG)
 
-${PROG}:	${OBJS}
-					@make re -C ./Libft
-					@$(CC) ${OBJS} -LLibft -lft -o ${PROG}
-
-
-bonus:		${PROG_B}
-
-${PROG_B}:	${OBJS_B}
-					@make re -C ./Libft
-					@$(CC) ${OBJS_B} -LLibft -lft -o ${PROG_B}
+bonus: $(BO_JECT)
+	@make bonus -C ./Libft
+	@$(CC) $(BO_JECT) -LLibft -lft -o $(My_PROG_B)
 
 clean:
-					@make clean -C ./Libft
-					@rm -f ${OBJS} ${OBJS_B}
+	@make clean -C ./Libft
+	@rm -rf $(O_JECT)
+	@rm -rf $(BO_JECT)
 
-fclean: 	clean
-					@make fclean -C ./Libft
-					@rm -f $(NAME)
-					@rm -f ${PROG}
+fclean: clean
+	@make fclean -C ./Libft  
+	@rm -rf $(My_PROG)
+	@rm -rf $(My_PROG_B)
 
-re:			fclean all
+re: fclean all
 
-re_bonus:	fclean bonus
+re_bonus: fclean bonus
 
 .PHONY: all clean fclean re re_bonus bonus

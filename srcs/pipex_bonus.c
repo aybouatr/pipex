@@ -66,16 +66,17 @@ char	*get_next_line(char **line)
 {
 	static char	*s_str;
 	char		*r_str;
-	int			fd;
+	char		*temp;
 
 	r_str = NULL;
-	fd = 0;
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (BUFFER_SIZE <= 0)
 		return (NULL);
-	s_str = get_read_str(fd, s_str);
+	s_str = get_read_str(0, s_str);
 	if (!s_str)
 		return (NULL);
+	temp = s_str;
 	r_str = get_than_line(s_str);
+	free(temp);
 	if (!r_str)
 		return (NULL);
 	s_str = get_remminder(s_str);
@@ -104,18 +105,16 @@ int	ft_here_doc(char *limiter, char *file)
 		close(fd[0]);
 		while (get_next_line(&line))
 		{
-			if (ft_strncmp(line, ftt_strjoin(ft_strdup(limiter), "\n"),
-					ft_strlen(line)) == 0)
-				exit(EXIT_SUCCESS);
+			if (ft_strncmp(ft_strjoin(limiter, "\n"), line,
+					ft_strlen(line), 1) == 0)
+				return (free(line), exit(EXIT_SUCCESS), 0);
 			write(fd[1], line, ft_strlen(line));
+			free(line);
 		}
 	}
-	else
-	{
-		close(fd[1]);
-		dup2(fd[0], STDIN_FILENO);
-		wait(NULL);
-	}
+	close(fd[1]);
+	dup2(fd[0], STDIN_FILENO);
+	wait(NULL);
 	return (open_fd(file, 1));
 }
 
@@ -126,7 +125,7 @@ int	main(int ac, char *av[], char *envp[])
 
 	if (ac >= 5 && check_cmd(av, ac))
 	{
-		if (ft_strncmp("here_doc", av[1], 8) == 0)
+		if (ft_strncmp("here_doc", av[1], 8, 0) == 0)
 		{
 			i = 3;
 			file_in_or_out[1] = ft_here_doc(av[2], av[ac - 1]);
