@@ -1,15 +1,40 @@
------------------------------------------------------------------> PIPEX <-------------------------------------------------------------------------------                                                          
+# Pipex
 
+**42 Project**: Pipex - A simulation of the Unix pipe functionality to enable communication between processes.
 
-         Here’s a simple definition for each of the Unix system calls
+## Project Overview
+
+The **Pipex** project consists of building a program that simulates the behavior of the `pipe` system call in Unix-like systems. The objective is to create a pipeline of commands, where the output of one command is passed as the input to the next, much like how the Unix shell handles pipes (`|`).
+
+The project focuses on:
+- **Forking processes**: Understanding how to create new processes.
+- **Redirection**: Redirecting the output and input of processes.
+- **Pipes**: Implementing inter-process communication using pipes.
+- **Error handling**: Managing edge cases and errors efficiently.
+
+## Features
+
+- **Simulate Unix Pipe**: Use `pipe`, `fork`, and `dup2` to simulate inter-process communication.
+- **Handle Multiple Commands**: Handle any number of commands passed via the command line.
+- **Error Handling**: Gracefully handle errors like invalid arguments, missing files, or failed system calls.
+- **Supports Redirection**: Handle standard input/output redirection for each process.
+
+## How It Works
+
+### Example Usage:
+
+##### usage
+    $ ./pipex infile "command1" "command2" outfile
+
+#### Here’s a simple definition for each of the Unix system calls
 First, you can start by saying that this video is very useful : https://youtu.be/Vax97MIL_uI?si=682KskoLRsWIxyeK
         
-1. open
+##### 1. open
 
         Definition: Opens a file to read from, write to, or both. It returns a file descriptor that you can use to access the file.
        Example: open("file.txt", O_RDONLY);
 
-2. close
+##### 2. close
 
        Definition: Closes an open file descriptor, freeing up the system resources associated with it.
        Example: close(fd);
