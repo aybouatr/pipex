@@ -23,5 +23,6 @@ The project focuses on:
 
 ##### usage
     $ ./pipex infile "command1" "command2" outfile
+https://media.discordapp.net/attachments/1330877911925919774/1336285066049097771/dup.png?ex=67a33ff2&is=67a1ee72&hm=3cbd6f17a742bef4968d8a77d627dc75456b07f136c7b034ffc16f69fd89b980&=&format=webp&quality=lossless
 
 
