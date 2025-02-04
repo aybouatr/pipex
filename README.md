@@ -27,10 +27,10 @@ The project focuses on:
 
 The following images explain the steps of simulating Unix pipe functionality in the Pipex project. Each image represents a different part of the process or simulation.
 
-1. **First Image: Pipe Creation Process**  
-   This image shows the initial step of creating a pipe for inter-process communication. It visualizes how two processes are connected by a pipe.
+1. **First Image: `dup()` - File Descriptor Duplication**  
+   This image shows how the `dup()` system call is used to duplicate file descriptors in the Unix process. It's a critical part of redirecting input/output streams in the Pipex project.
 
-   ![Pipe Creation](https://media.discordapp.net/attachments/1330877911925919774/1336285066049097771/dup.png?ex=67a33ff2&is=67a1ee72&hm=3cbd6f17a742bef4968d8a77d627dc75456b07f136c7b034ffc16f69fd89b980&=&format=webp&quality=lossless)
+   ![dup() - File Descriptor Duplication](https://media.discordapp.net/attachments/1330877911925919774/1336285066049097771/dup.png?ex=67a33ff2&is=67a1ee72&hm=3cbd6f17a742bef4968d8a77d627dc75456b07f136c7b034ffc16f69fd89b980&=&format=webp&quality=lossless)
 
 2. **Second Image: Pipe with Multiple Commands**  
    This image demonstrates how multiple commands are piped together in the Pipex simulation. Each command takes the output from the previous command as its input.
@@ -46,4 +46,3 @@ The following images explain the steps of simulating Unix pipe functionality in 
    This image visualizes a pipe that connects two processes, showing how the output of the first command is passed as input to the second command.
 
    ![Pipe with Two Commands](https://media.discordapp.net/attachments/1330877911925919774/1336285066611134548/pipe_with_two-2.png?ex=67a33ff2&is=67a1ee72&hm=3cfe3e4187f2c31f5479255d3a35a9aeb747a8a5f727355e3958908f01c23940&=&format=webp&quality=lossless)
-
