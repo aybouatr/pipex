@@ -23,10 +23,27 @@ The project focuses on:
 
 ##### usage
     $ ./pipex infile "command1" "command2" outfile
+### Same Image Explained More
 
-![Image](https://media.discordapp.net/attachments/1330877911925919774/1336285066049097771/dup.png?ex=67a33ff2&is=67a1ee72&hm=3cbd6f17a742bef4968d8a77d627dc75456b07f136c7b034ffc16f69fd89b980&=&format=webp&quality=lossless)
-![Image](https://media.discordapp.net/attachments/1330877911925919774/1336285066346762311/pipe3.png?ex=67a33ff2&is=67a1ee72&hm=57b1ed4f83f0a78315064506580e26705bc7b59ce53b56006de32eddf2c89ed1&=&format=webp&quality=lossless)
-![Image](https://media.discordapp.net/attachments/1330877911925919774/1336285066866724934/simple_fork.png?ex=67a33ff2&is=67a1ee72&hm=1a3ecd9a9bd93222aa9889c914698bd6b62e4eddebb3d6c483a942ff3862408e&=&format=webp&quality=lossless&width=866&height=565)
-![Image](https://media.discordapp.net/attachments/1330877911925919774/1336285066611134548/pipe_with_two-2.png?ex=67a33ff2&is=67a1ee72&hm=3cfe3e4187f2c31f5479255d3a35a9aeb747a8a5f727355e3958908f01c23940&=&format=webp&quality=lossless)
+The following images explain the steps of simulating Unix pipe functionality in the Pipex project. Each image represents a different part of the process or simulation.
 
+1. **First Image: Pipe Creation Process**  
+   This image shows the initial step of creating a pipe for inter-process communication. It visualizes how two processes are connected by a pipe.
+
+   ![Pipe Creation](https://media.discordapp.net/attachments/1330877911925919774/1336285066049097771/dup.png?ex=67a33ff2&is=67a1ee72&hm=3cbd6f17a742bef4968d8a77d627dc75456b07f136c7b034ffc16f69fd89b980&=&format=webp&quality=lossless)
+
+2. **Second Image: Pipe with Multiple Commands**  
+   This image demonstrates how multiple commands are piped together in the Pipex simulation. Each command takes the output from the previous command as its input.
+
+   ![Multiple Commands Pipe](https://media.discordapp.net/attachments/1330877911925919774/1336285066346762311/pipe3.png?ex=67a33ff2&is=67a1ee72&hm=57b1ed4f83f0a78315064506580e26705bc7b59ce53b56006de32eddf2c89ed1&=&format=webp&quality=lossless)
+
+3. **Third Image: Simple Forking**  
+   The forking process is visualized in this diagram. It shows how a process is forked to create a new child process that will run the given commands.
+
+   ![Simple Forking](https://media.discordapp.net/attachments/1330877911925919774/1336285066866724934/simple_fork.png?ex=67a33ff2&is=67a1ee72&hm=1a3ecd9a9bd93222aa9889c914698bd6b62e4eddebb3d6c483a942ff3862408e&=&format=webp&quality=lossless&width=866&height=565)
+
+4. **Fourth Image: Pipe with Two Commands**  
+   This image visualizes a pipe that connects two processes, showing how the output of the first command is passed as input to the second command.
+
+   ![Pipe with Two Commands](https://media.discordapp.net/attachments/1330877911925919774/1336285066611134548/pipe_with_two-2.png?ex=67a33ff2&is=67a1ee72&hm=3cfe3e4187f2c31f5479255d3a35a9aeb747a8a5f727355e3958908f01c23940&=&format=webp&quality=lossless)
 
