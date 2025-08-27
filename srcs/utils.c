@@ -61,8 +61,7 @@ int	execution(char **envp, char *cmd)
 		exit(127);
 	}
 	if (execve(path, s_cmd, NULL) == -1)
-		return (ft_free(s_cmd, path), error(1), 1);
-	return (ft_free(s_cmd, path), 1);
+		return (ft_free(s_cmd, path), error(1), 1)
 }
 
 void	error(int n)
